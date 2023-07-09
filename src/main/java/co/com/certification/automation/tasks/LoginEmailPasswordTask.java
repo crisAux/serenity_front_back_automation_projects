@@ -24,8 +24,8 @@ public class LoginEmailPasswordTask implements Task {
         this.user = user;
     }
 
-    //    @Override
-    //  @Step("Se realiza la autenticacion")
+    @Override
+   @Step("Se realiza la autenticacion")
     public <T extends Actor> void performAs(T theActor) {
         theActor.attemptsTo(
                 Click.on(ExitoMainPage.FORM_LOGIN_BUTTON));

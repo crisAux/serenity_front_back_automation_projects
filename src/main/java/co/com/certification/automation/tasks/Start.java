@@ -38,9 +38,6 @@ public class Start implements Task {
 
 
 
-        theActor.should(GivenWhenThen.seeThat(WebElementQuestion.the(ExitoMainPage.FORM_LOGIN_BUTTON), isVisible())
-                .orComplainWith(StartError.class,
-                        StartError.MESSAGE_FAILED_AUTHENTICATION));
 
 
     }

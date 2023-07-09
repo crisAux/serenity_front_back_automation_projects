@@ -3,6 +3,7 @@ package co.com.certification.automation.stepdefinitions;
 import co.com.certification.automation.tasks.ArriveToExitoMainPageTask;
 import co.com.certification.automation.tasks.LoginEmailPasswordTask;
 import co.com.certification.automation.tasks.Start;
+import co.com.certification.automation.tasks.VerifyLoginTask;
 import co.com.certification.automation.util.resources.LoginManager;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -22,8 +23,6 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 public class LoginExitoStepDefinition {
 
     private static final String ACTOR_NAME = "Cesar";
-
-    private static final String OPERA = "opera";
 
     private static final LoginManager LOGIN_CREDENTIALS=LoginManager.getInstance();
 
@@ -66,5 +65,8 @@ public class LoginExitoStepDefinition {
 
     @Then("Cesar Puede ingresar con exito a la plataforma del exito")
     public void cesarPuedeIngresarConExitoALaPlataformaDelExito() {
+        actor.wasAbleTo(
+                VerifyLoginTask.verifyLoginTask()
+        );
     }
 }

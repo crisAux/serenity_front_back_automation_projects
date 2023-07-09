@@ -15,8 +15,8 @@ import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisi
 public class ArriveToExitoMainPageTask implements Task {
 
     private ExitoMainPage exitoMainPage;
-  //  @Override
-  //  @Step("Ingresar a la pagina principal de exito.com")
+  @Override
+  @Step("Ingresar a la pagina principal de exito.com")
     public <T extends Actor> void performAs(T theActor) {
 
         theActor.attemptsTo(Open.browserOn(exitoMainPage));
