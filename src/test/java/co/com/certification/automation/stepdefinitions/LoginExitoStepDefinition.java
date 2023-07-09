@@ -1,5 +1,7 @@
 package co.com.certification.automation.stepdefinitions;
 
+import co.com.certification.automation.tasks.ArriveToExitoMainPageTask;
+import co.com.certification.automation.tasks.LoginEmailPasswordTask;
 import co.com.certification.automation.tasks.Start;
 import co.com.certification.automation.util.resources.LoginManager;
 import io.cucumber.java.Before;
@@ -12,8 +14,7 @@ import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.opera.OperaDriver;
-import org.openqa.selenium.opera.OperaOptions;
+
 
 import static co.com.certification.automation.model.builders.UserBuilder.theUser;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -51,14 +52,16 @@ public class LoginExitoStepDefinition {
 
     @Given("Cesar esta en la pagina principal de exito")
     public void cesarEstaEnLaPaginaPrincipalDeExito() {
-        actor.wasAbleTo(
-                Start.authenticating(theUser(EXITO_USER)
-                        .withPassword(EXITO_PASSWORD)));
-
+       actor.wasAbleTo(
+               ArriveToExitoMainPageTask.arriveToExitoMainPage());
     }
 
     @When("Cesar se autentica con su respectivo usuario y password")
     public void cesarSeAutenticaConSuRespectivoUsuarioYPassword() {
+        actor.wasAbleTo(
+                LoginEmailPasswordTask.loginEmailPassword(theUser(EXITO_USER)
+                        .withPassword(EXITO_PASSWORD))
+        );
     }
 
     @Then("Cesar Puede ingresar con exito a la plataforma del exito")

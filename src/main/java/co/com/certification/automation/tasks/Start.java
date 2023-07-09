@@ -33,33 +33,15 @@ public class Start implements Task {
     }
 
     @Override
-    @Step("{0} performs an authentication")
+    //@Step("{0} performs an authentication")
     public <T extends Actor> void performAs(T theActor) {
-        //theActor.attemptsTo(Open.browserOn().the(ExitoMainPage.class));
-        theActor.attemptsTo(Open.browserOn(exitoMainPage));
 
-        theActor.should(GivenWhenThen.seeThat(WebElementQuestion.the(ExitoMainPage.FORM_LOGIN_BUTTON), isVisible())
-                .orComplainWith(StartError.class,
-                        StartError.MESSAGE_MAIN_PAGE_NOT_LOADED));
 
-        theActor.attemptsTo(
-                Click.on(ExitoMainPage.FORM_LOGIN_BUTTON));
-
-        theActor.should(GivenWhenThen.seeThat(WebElementQuestion.the(MiCuentaPage.GO_TO_LOGIN_BUTTON), isVisible())
-                .orComplainWith(StartError.class,
-                        StartError.MESSAGE_LOGIN_FORM_NOT_LOADED));
-
-        theActor.attemptsTo(
-                Click.on(MiCuentaPage.GO_TO_LOGIN_BUTTON),
-                Enter.theValue(user.getUsername()).into(MiCuentaPage.INPUT_EMAIL),
-                EnterAndHide.theValue(user.getPassword()).as("a password").into(MiCuentaPage.INPUT_PASSWORD),
-                Click.on(MiCuentaPage.SING_IN));
 
         theActor.should(GivenWhenThen.seeThat(WebElementQuestion.the(ExitoMainPage.FORM_LOGIN_BUTTON), isVisible())
                 .orComplainWith(StartError.class,
                         StartError.MESSAGE_FAILED_AUTHENTICATION));
 
-        System.out.println("mensaje");
 
     }
 

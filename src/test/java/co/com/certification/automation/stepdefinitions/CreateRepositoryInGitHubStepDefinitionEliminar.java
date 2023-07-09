@@ -4,7 +4,7 @@ import co.com.certification.automation.model.enumerables.GitIgnore;
 import co.com.certification.automation.model.enumerables.License;
 import co.com.certification.automation.questions.TheCurrent;
 import co.com.certification.automation.questions.TheRepository;
-import co.com.certification.automation.tasks.CreateRepository;
+import co.com.certification.automation.tasks.CreateRepositoryEliminar;
 import co.com.certification.automation.tasks.Start;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -14,8 +14,6 @@ import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
-import org.openqa.selenium.opera.OperaDriver;
-import org.openqa.selenium.opera.OperaOptions;
 
 import static co.com.certification.automation.model.builders.RepositoryBuilder.name;
 import static co.com.certification.automation.model.builders.UserBuilder.theUser;
@@ -40,11 +38,14 @@ public class CreateRepositoryInGitHubStepDefinitionEliminar {
     }
 
     private void verifyIfDriverIsOpera() {
+        /*
         if(OPERA.equals(System.getProperty("context"))){
             OperaOptions operaOptions = new OperaOptions();
             operaOptions.setBinary(System.getProperty("binary"));
             BrowseTheWeb.as(theActorCalled(CESAR)).setDriver(new OperaDriver(operaOptions));
         }
+
+         */
     }
 
     @Given("^Cesar wants to start versioning$")
@@ -57,7 +58,7 @@ public class CreateRepositoryInGitHubStepDefinitionEliminar {
     @When("^Cesar creates a repository$")
     public void createRepository() {
         theActorInTheSpotlight().attemptsTo(
-                CreateRepository.withTheFollowingData(
+                CreateRepositoryEliminar.withTheFollowingData(
                         name(REPOSITORY_NAME)
                         .description("repository for bdd tests")
                         .initializeWithREADME()

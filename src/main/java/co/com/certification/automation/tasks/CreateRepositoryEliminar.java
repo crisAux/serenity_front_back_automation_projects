@@ -24,11 +24,11 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isNotVisible;
 import static net.serenitybdd.screenplay.questions.WebElementQuestion.the;
 
-public class CreateRepository implements Task {
+public class CreateRepositoryEliminar implements Task {
 
     private final Repository repository;
 
-    public CreateRepository(Repository repository) {
+    public CreateRepositoryEliminar(Repository repository) {
         this.repository = repository;
     }
 
@@ -57,8 +57,8 @@ public class CreateRepository implements Task {
         );
     }
 
-    public static CreateRepository withTheFollowingData(Builder<Repository> builder) throws RepositoryModelCreationException {
-        return instrumented(CreateRepository.class, builder.build());
+    public static CreateRepositoryEliminar withTheFollowingData(Builder<Repository> builder) throws RepositoryModelCreationException {
+        return instrumented(CreateRepositoryEliminar.class, builder.build());
     }
 
 }
