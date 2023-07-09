@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                bat 'gradlew.bat clean build -x test'
+                bat 'gradlew.bat clean build -x test aggregate'
             }
         }
         stage('test-firefox') {
