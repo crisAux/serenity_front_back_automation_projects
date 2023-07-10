@@ -5,13 +5,11 @@ import co.com.certification.automation.model.enumerables.License;
 import co.com.certification.automation.questions.TheCurrent;
 import co.com.certification.automation.questions.TheRepository;
 import co.com.certification.automation.tasks.CreateRepositoryEliminar;
-import co.com.certification.automation.tasks.Start;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.GivenWhenThen;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 
@@ -50,9 +48,7 @@ public class CreateRepositoryInGitHubStepDefinitionEliminar {
 
     @Given("^Cesar wants to start versioning$")
     public void startVersioning() {
-        theActorCalled(CESAR).wasAbleTo(
-                Start.authenticating(theUser(GITHUB_USER)
-                .withPassword(SECRET)));
+
     }
 
     @When("^Cesar creates a repository$")

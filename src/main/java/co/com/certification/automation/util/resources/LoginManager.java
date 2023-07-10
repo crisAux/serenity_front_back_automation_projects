@@ -27,7 +27,8 @@ public class LoginManager {
             username = properties.getProperty("username_exito");
             password = properties.getProperty("password_exito");
         } catch (IOException e) {
-            e.printStackTrace();
+            username = "USER_DEFAULT";
+            password = "PASSWOR_DEFAULT";
         }
     }
 

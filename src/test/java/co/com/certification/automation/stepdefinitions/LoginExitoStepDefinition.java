@@ -2,7 +2,6 @@ package co.com.certification.automation.stepdefinitions;
 
 import co.com.certification.automation.tasks.ArriveToExitoMainPageTask;
 import co.com.certification.automation.tasks.LoginEmailPasswordTask;
-import co.com.certification.automation.tasks.Start;
 import co.com.certification.automation.tasks.VerifyLoginTask;
 import co.com.certification.automation.util.resources.LoginManager;
 import io.cucumber.java.Before;
@@ -18,7 +17,6 @@ import org.openqa.selenium.WebDriver;
 
 
 import static co.com.certification.automation.model.builders.UserBuilder.theUser;
-import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 
 public class LoginExitoStepDefinition {
 
