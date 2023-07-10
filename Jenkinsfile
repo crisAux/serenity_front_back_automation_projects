@@ -2,12 +2,12 @@ pipeline {
     agent any
     triggers { cron('H */4 * * 1-5') }
     parameters {
-        string(name: 'USER', defaultValue: 'tu usuario', description: 'Usuario de GitHub')
+
     }
     stages {
         stage('build') {
             steps {
-                bat 'gradlew.bat clean build -x test aggregate'
+                bat 'gradlew.bat clean build -x test'
             }
         }
         stage('test-firefox') {
