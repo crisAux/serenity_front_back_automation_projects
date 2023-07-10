@@ -9,9 +9,7 @@ pipeline {
         }
         stage('test-firefox') {
             steps {
-                withCredentials([string(credentialsId: 'password-github', variable: 'password')]) {
-                    bat "gradlew.bat test -Dcontext=firefox -Dwebdriver.driver=firefox"
-                }
+                bat "gradlew.bat test -Dcontext=firefox -Dwebdriver.driver=firefox"
             }
         }
         stage('aggregate') {
