@@ -9,7 +9,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(features = "src/test/resources/features/login_exito.feature",
-        glue = {"co.com.certification.automation"})
+        glue = {"co.com.certification.automation.stepdefinitions",
+                "co.com.certification.automation.webHooks"}
+)
 public class LoginTestRunner {
 
 }
