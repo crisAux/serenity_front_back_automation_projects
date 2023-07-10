@@ -13,7 +13,7 @@ import static co.com.certification.automation.model.builders.UserBuilder.theUser
 import static co.com.certification.automation.webHooks.WebCommonSteps.actor;
 
 public class LoginExitoStepDefinition  {
-    
+
     protected static final LoginManager LOGIN_CREDENTIALS=LoginManager.getInstance();
     protected static final String EXITO_USER = LOGIN_CREDENTIALS.getUsername();
     protected static final String EXITO_PASSWORD = LOGIN_CREDENTIALS.getPassword();
