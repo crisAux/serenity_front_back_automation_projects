@@ -1,13 +1,13 @@
 package co.com.certification.automation.model;
 
-public class Products {
+public class Product {
     private int position;
     private int amount;
     private String nameOfProduct;
 
     private double price;
 
-    public Products(int position, int amount) {
+    public Product(int position, int amount) {
         this.position = position;
         this.amount = amount;
     }

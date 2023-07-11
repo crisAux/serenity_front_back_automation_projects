@@ -2,6 +2,7 @@ package co.com.certification.automation.stepdefinitions;
 
 import co.com.certification.automation.tasks.ArriveToExitoMainPageTask;
 import co.com.certification.automation.tasks.ArriveToCabeceraSectionTask;
+import co.com.certification.automation.tasks.SelectSeveralProductsRandomlyTask;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,14 +15,15 @@ public class AddProductsShoppingCartDefinition {
     @Given("Cesar esta en la seccion de cabeceras de la categoria de dormitorio")
     public void cesarEstaEnLaSeccionDeCabecerasDeLaCategoriaDeDormitorio() {
         actor.wasAbleTo(
-                ArriveToExitoMainPageTask.arriveToExitoMainPage());
-        actor.wasAbleTo(
                 ArriveToCabeceraSectionTask.arriveToHeadersSection()
         );
     }
 
     @When("Cesar agrega de forma aleatoria varios de estos productos al carrito de compras en diferentes cantidades")
     public void cesarAgregaDeFormaAleatoriaVariosDeEstosProductosAlCarritoDeComprasEnDiferentesCantidades() {
+        actor.wasAbleTo(
+                SelectSeveralProductsRandomlyTask.selectSeveralProductsRandomlyTask()
+        );
     }
 
     @Then("Cesar verifica que los nombres de los productos en el carrito de compras corresponda a lo agregado")

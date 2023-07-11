@@ -8,6 +8,8 @@ import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
 
+import java.time.Duration;
+
 public class WebCommonSteps {
 
     public static Actor actor;
