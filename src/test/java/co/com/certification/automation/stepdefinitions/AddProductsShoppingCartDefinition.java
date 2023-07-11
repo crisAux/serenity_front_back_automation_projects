@@ -1,6 +1,7 @@
 package co.com.certification.automation.stepdefinitions;
 
 import co.com.certification.automation.tasks.ArriveToExitoMainPageTask;
+import co.com.certification.automation.tasks.ArriveToCabeceraSectionTask;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,6 +15,9 @@ public class AddProductsShoppingCartDefinition {
     public void cesarEstaEnLaSeccionDeCabecerasDeLaCategoriaDeDormitorio() {
         actor.wasAbleTo(
                 ArriveToExitoMainPageTask.arriveToExitoMainPage());
+        actor.wasAbleTo(
+                ArriveToCabeceraSectionTask.arriveToHeadersSection()
+        );
     }
 
     @When("Cesar agrega de forma aleatoria varios de estos productos al carrito de compras en diferentes cantidades")

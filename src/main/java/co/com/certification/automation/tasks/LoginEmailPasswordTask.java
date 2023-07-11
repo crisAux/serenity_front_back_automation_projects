@@ -1,6 +1,6 @@
 package co.com.certification.automation.tasks;
 
-import co.com.certification.automation.exceptions.StartError;
+import co.com.certification.automation.exceptions.LandingPageExitoError;
 import co.com.certification.automation.interactions.EnterAndHide;
 import co.com.certification.automation.model.User;
 import co.com.certification.automation.userinterface.ExitoMainPage;
@@ -30,9 +30,10 @@ public class LoginEmailPasswordTask implements Task {
         theActor.attemptsTo(
                 Click.on(ExitoMainPage.FORM_LOGIN_BUTTON));
 
-        theActor.should(GivenWhenThen.seeThat(WebElementQuestion.the(MiCuentaPage.GO_TO_LOGIN_BUTTON), isVisible())
-                .orComplainWith(StartError.class,
-                        StartError.MESSAGE_LOGIN_FORM_NOT_LOADED));
+        theActor.should(
+                GivenWhenThen.seeThat(WebElementQuestion.the(MiCuentaPage.GO_TO_LOGIN_BUTTON), isVisible())
+                .orComplainWith(LandingPageExitoError.class,
+                        LandingPageExitoError.MESSAGE_LOGIN_FORM_NOT_LOADED));
 
         theActor.attemptsTo(
                 Click.on(MiCuentaPage.GO_TO_LOGIN_BUTTON),

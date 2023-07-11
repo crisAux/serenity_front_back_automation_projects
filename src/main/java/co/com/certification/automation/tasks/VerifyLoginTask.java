@@ -1,6 +1,6 @@
 package co.com.certification.automation.tasks;
 
-import co.com.certification.automation.exceptions.StartError;
+import co.com.certification.automation.exceptions.LandingPageExitoError;
 import co.com.certification.automation.userinterface.ExitoMainPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.GivenWhenThen;
@@ -15,11 +15,11 @@ public class VerifyLoginTask implements Task {
 
 
     @Override
-    @Step("Se verifica autentitcacion")
+    @Step("Se verifica autenticacion")
     public <T extends Actor> void performAs(T theActor) {
         theActor.should(GivenWhenThen.seeThat(WebElementQuestion.the(ExitoMainPage.FORM_LOGIN_BUTTON), isVisible())
-                .orComplainWith(StartError.class,
-                        StartError.MESSAGE_FAILED_AUTHENTICATION));
+                .orComplainWith(LandingPageExitoError.class,
+                        LandingPageExitoError.MESSAGE_FAILED_AUTHENTICATION));
 
     }
 

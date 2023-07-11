@@ -1,6 +1,6 @@
 package co.com.certification.automation.tasks;
 
-import co.com.certification.automation.exceptions.StartError;
+import co.com.certification.automation.exceptions.LandingPageExitoError;
 import co.com.certification.automation.userinterface.ExitoMainPage;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.GivenWhenThen;
@@ -22,8 +22,8 @@ public class ArriveToExitoMainPageTask implements Task {
         theActor.attemptsTo(Open.browserOn(exitoMainPage));
 
         theActor.should(GivenWhenThen.seeThat(WebElementQuestion.the(ExitoMainPage.FORM_LOGIN_BUTTON), isVisible())
-                .orComplainWith(StartError.class,
-                        StartError.MESSAGE_MAIN_PAGE_NOT_LOADED));
+                .orComplainWith(LandingPageExitoError.class,
+                        LandingPageExitoError.MESSAGE_MAIN_PAGE_NOT_LOADED));
     }
 
     public static ArriveToExitoMainPageTask arriveToExitoMainPage(){
