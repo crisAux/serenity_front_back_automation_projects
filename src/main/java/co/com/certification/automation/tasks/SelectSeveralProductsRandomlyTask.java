@@ -120,7 +120,7 @@ public class SelectSeveralProductsRandomlyTask implements Task {
         }
         BrowseTheWeb.as(theActor).evaluateJavascript(
                 String.format("window.scrollTo(%d, %d)",60,400));
-        waitWithSleep(2);
+        waitWithSleep(7);
 
     }
 
