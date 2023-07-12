@@ -10,13 +10,10 @@ import io.cucumber.java.en.When;
 
 
 import static co.com.certification.automation.model.builders.UserBuilder.theUser;
-import static co.com.certification.automation.webHooks.WebCommonSteps.actor;
+import static co.com.certification.automation.webHooks.WebCommonSteps.*;
 
 public class LoginExitoStepDefinition  {
-    
-    protected static final LoginManager LOGIN_CREDENTIALS=LoginManager.getInstance();
-    protected static final String EXITO_USER = LOGIN_CREDENTIALS.getUsername();
-    protected static final String EXITO_PASSWORD = LOGIN_CREDENTIALS.getPassword();
+
 
 
     @Given("Cesar esta en la pagina principal de exito")

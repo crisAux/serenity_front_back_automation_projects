@@ -66,8 +66,12 @@ public class CreateRepositoryInGitHubStepDefinitionEliminar {
 
     @Then("^Cesar should see the repository created$")
     public void shouldSeeTheRepositorioCreated() {
-        theActorInTheSpotlight().should(seeThat(TheRepository.name(), is(REPOSITORY_NAME)));
-        theActorInTheSpotlight().should(GivenWhenThen.seeThat(TheCurrent.url(), is(BASE_URL_OF_REPOSITORY_CREATED)));
+        theActorInTheSpotlight().should(
+                seeThat(TheRepository.name(), is(REPOSITORY_NAME))
+        );
+        theActorInTheSpotlight().should(GivenWhenThen.seeThat(
+                TheCurrent.url(), is(BASE_URL_OF_REPOSITORY_CREATED))
+        );
     }
 
 }

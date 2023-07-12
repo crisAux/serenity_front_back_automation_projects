@@ -47,6 +47,9 @@ dependencies {
 tasks.withType(Test){
     systemProperties = System.properties as Map<String, ?>
     maxParallelForks = Runtime.runtime.availableProcessors()
+    filter{
+        includeTestsMatching "co.com.certification.automation.runners.*"
+    }
 }
 
 gradle.startParameter.continueOnFailure = true

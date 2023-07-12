@@ -1,6 +1,6 @@
 package co.com.certification.automation.tasks;
 
-import co.com.certification.automation.exceptions.StartError;
+import co.com.certification.automation.exceptions.LandingPageExitoError;
 import co.com.certification.automation.interactions.EnterAndHide;
 import co.com.certification.automation.model.User;
 import co.com.certification.automation.userinterface.ExitoMainPage;
@@ -10,7 +10,9 @@ import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
+import net.serenitybdd.screenplay.waits.Wait;
 import net.thucydides.core.annotations.Step;
 
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
@@ -28,11 +30,11 @@ public class LoginEmailPasswordTask implements Task {
    @Step("Se realiza la autenticacion")
     public <T extends Actor> void performAs(T theActor) {
         theActor.attemptsTo(
-                Click.on(ExitoMainPage.FORM_LOGIN_BUTTON));
-
-        theActor.should(GivenWhenThen.seeThat(WebElementQuestion.the(MiCuentaPage.GO_TO_LOGIN_BUTTON), isVisible())
-                .orComplainWith(StartError.class,
-                        StartError.MESSAGE_LOGIN_FORM_NOT_LOADED));
+                Click.on(ExitoMainPage.FORM_LOGIN_BUTTON),
+                Wait.until(
+                        WebElementQuestion.the(MiCuentaPage.GO_TO_LOGIN_BUTTON) , WebElementStateMatchers.isEnabled()
+                ).forNoMoreThan(30).seconds()
+                );
 
         theActor.attemptsTo(
                 Click.on(MiCuentaPage.GO_TO_LOGIN_BUTTON),
