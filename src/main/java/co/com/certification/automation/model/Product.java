@@ -5,6 +5,8 @@ public class Product {
     private int amount;
     private String nameOfProduct;
 
+    private int productTotalPrice;
+
     private double price;
 
     public Product(int position, int amount) {
@@ -34,5 +36,13 @@ public class Product {
 
     public double getPrice() {
         return price;
+    }
+
+    public int getProductTotalPrice() {
+        return productTotalPrice;
+    }
+
+    public void setProductTotalPrice(int productTotalPrice) {
+        this.productTotalPrice = productTotalPrice;
     }
 }

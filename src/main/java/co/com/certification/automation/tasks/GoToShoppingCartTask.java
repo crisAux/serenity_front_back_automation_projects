@@ -26,6 +26,9 @@ public class GoToShoppingCartTask implements Task {
     public <T extends Actor> void performAs(T theActor) {
        theActor.attemptsTo(
                Click.on(ExitoMainPage.LINK_SHOPPING_CART),
+               Wait.until(
+                       WebElementQuestion.the(ShoppingCartPage.INPUT_EMAIL_SHOPPING_CART) , WebElementStateMatchers.isEnabled()
+               ).forNoMoreThan(30).seconds(),
                Enter.theValue(email).into(ShoppingCartPage.INPUT_EMAIL_SHOPPING_CART),
                Click.on(ShoppingCartPage.BUTTON_CONFIRM_EMAIL),
                Wait.until(

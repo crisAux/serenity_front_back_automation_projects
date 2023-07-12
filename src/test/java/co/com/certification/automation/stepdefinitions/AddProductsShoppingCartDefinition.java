@@ -4,9 +4,11 @@ import co.com.certification.automation.model.Product;
 import co.com.certification.automation.questions.AddedProductsAmountList;
 import co.com.certification.automation.questions.AddedProductsNameList;
 import co.com.certification.automation.questions.AddedProductsPriceList;
+import co.com.certification.automation.questions.TotalPrice;
 import co.com.certification.automation.tasks.ArriveToCabeceraSectionTask;
 import co.com.certification.automation.tasks.GoToShoppingCartTask;
 import co.com.certification.automation.tasks.SelectSeveralProductsRandomlyTask;
+import co.com.certification.automation.tasks.ShoppingCartCleanTask;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,7 +21,6 @@ import java.util.List;
 
 import static co.com.certification.automation.webHooks.WebCommonSteps.EXITO_USER;
 import static co.com.certification.automation.webHooks.WebCommonSteps.actor;
-import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
 import static org.hamcrest.core.Is.is;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -27,7 +28,7 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 public class AddProductsShoppingCartDefinition {
 
     private List<Product> productsInShoppingCart;
-    private List<Double> priceInProductsList=new ArrayList<>();
+    private List<Double> productTotalPrinceInProductsList =new ArrayList<>();
 
     private List<Integer> amountInProductsList=new ArrayList<>();
     private List<String> nameInProductsList=new ArrayList<>();
@@ -53,12 +54,12 @@ public class AddProductsShoppingCartDefinition {
 
     private void orderInformationObtainedOnTheScreen(){
         for (Product productGetted:productsInShoppingCart) {
-            priceInProductsList.add(productGetted.getPrice());
+            productTotalPrinceInProductsList.add(productGetted.getPrice()*productGetted.getAmount());
             amountInProductsList.add(productGetted.getAmount());
             nameInProductsList.add(productGetted.getNameOfProduct());
             totalPrice+=(productGetted.getPrice()*productGetted.getAmount());
         }
-        Collections.sort(priceInProductsList);
+        Collections.sort(productTotalPrinceInProductsList);
         Collections.sort(amountInProductsList);
         Collections.sort(nameInProductsList);
     }
@@ -75,7 +76,7 @@ public class AddProductsShoppingCartDefinition {
     @And("Verifica que el total de los precios de los productos corresponda")
     public void verificaQueElTotalDeLosPreciosDeLosProductosCorresponda() {
         actor.should(GivenWhenThen.seeThat(AddedProductsPriceList.listOfAddedProducts(),
-                is(priceInProductsList)));
+                is(productTotalPrinceInProductsList)));
     }
 
     @And("Verifica que las cantidades de los productos sea lo agregado en el proceso")
@@ -86,5 +87,8 @@ public class AddProductsShoppingCartDefinition {
 
     @And("que el total de los productos sea igual a las cantidades de los productos agregados")
     public void queElTotalDeLosProductosSeaIgualALasCantidadesDeLosProductosAgregados() {
+        actor.should(GivenWhenThen.seeThat(TotalPrice.getProductsTotalPrice(),
+                is(totalPrice)));
+        actor.wasAbleTo(ShoppingCartCleanTask.cleanShoppingCart());
     }
 }

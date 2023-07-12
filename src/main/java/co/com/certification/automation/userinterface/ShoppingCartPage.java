@@ -26,5 +26,15 @@ public class ShoppingCartPage {
     public static final Target ELEMENT_WITH_TOTAL_PRICE=Target.the("element with total price")
             .located(By.cssSelector("div[class='exito-checkout-io-0-x-summaryTotal'] span[data-molecule-summary-item-value='true']"));
 
+    public static final Target BUTTON_CLEAN_SHOPING_CART =Target.the("button to clean all items in shopping cart")
+            .located(By.cssSelector("button[class*='emptyCartShowButton']"));
+
+    public static final Target BUTTON_CONFIRM_CLEAN_SHOPING_CART =Target.the("button to confirm clean of all items in shopping cart")
+            .located(By.cssSelector("div[data-molecule-modal-confirmation-button-container='true'] > button:nth-child(2)"));
+
+    public static final Target TITLE_CLEAN_SHOPING_CART =Target.the("title to confirm clean shopping cart")
+            .located(By.cssSelector("h1[class*='emptyCartPageTitle']"));
+
+
 
 }

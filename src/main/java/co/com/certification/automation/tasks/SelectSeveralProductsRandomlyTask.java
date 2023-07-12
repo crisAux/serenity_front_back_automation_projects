@@ -26,6 +26,7 @@ import java.time.Duration;
 import java.time.temporal.TemporalUnit;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
@@ -42,34 +43,58 @@ public class SelectSeveralProductsRandomlyTask implements Task {
         Random random = new Random();
         while (products.size() < 5) {
             int position = random.nextInt(12) + 1;
-            if (!(generatePositions.contains(position))) {
+
+            boolean isPositionAvailable= isPositionAvailable(position);
+            if (!(generatePositions.contains(position)) && isPositionAvailable)
+            {
                 generatePositions.add(position);
-                int amount = random.nextInt(10) + 1;
+                int amount = random.nextInt(5) + 1;
                 Product objeto = new Product(position, amount);
                 products.add(objeto);
             }
         }
     }
 
+    private static boolean isPositionAvailable(int position) {
+        Integer[] availablePositionArray= new Integer[]{
+                7
+        };
+        return  Arrays.stream(availablePositionArray).noneMatch(Predicate.isEqual(position));
+    }
+
     @Override
     @Step("Seleccionar varios productos de cabecera de cama")
     public <T extends Actor> void performAs(T theActor) {
-
-        String locateForProducts="div[id='gallery-layout-container'] > div:nth-child(%d) div[class*='button-modal']";
-        List<WebElementFacade> productsElementsList= CabecerasPage.getAllBuyButtons(theActor);
+        String locateForProducts="div[id='gallery-layout-container'] > div:nth-child(%d) ";
+        String locateForPriceProducts=locateForProducts+"div[class='exito-vtex-components-4-x-PricePDP']";
+        String locateForRapidSaleProducts=locateForProducts+"div[class*='button-modal']";
         for (int i=0; i<products.size();i++){
             Product currentProduct=products.get(i);
             int productCurrentPosition=currentProduct.getPosition();
-            By productSelector=By.cssSelector(String.format(locateForProducts,productCurrentPosition));
-            Target elementProduct=Target.the("product selected for add to shopping cart")
-                    .located(productSelector);
-            Point coordinates = elementProduct.resolveFor(theActor).getCoordinates().onPage();
-            int positionY=Math.abs(coordinates.y-140);
+            By productRapidSaleSelector=By.cssSelector(
+                    String.format(locateForRapidSaleProducts,productCurrentPosition));
+            Target buttonRapidSaleProduct=Target.the(
+                    "button rapid sale from product selected for add to shopping cart")
+                    .located(productRapidSaleSelector);
+            Point coordinates = buttonRapidSaleProduct.resolveFor(theActor).getCoordinates().onPage();
+            int positionY=Math.abs(coordinates.y-180);
             BrowseTheWeb.as(theActor).evaluateJavascript(
                     String.format("window.scrollTo(%d, %d)",coordinates.x,positionY)
             );
+            //
+            Target elementPriceProduct=Target.the(
+                            "product price selected for add to shopping cart")
+                    .located(By.cssSelector(String.format(locateForPriceProducts,productCurrentPosition))
+                    );
+            String strPriceOfProduct=elementPriceProduct.resolveFor(theActor)
+                    .getText();
+            double priceOfProduct=Double.parseDouble(
+                    strPriceOfProduct.replace("$ ","").replace(".","")
+            );
+            products.get(i).setPrice(priceOfProduct);
+            //
             waitWithSleep(2);
-            elementProduct.resolveFor(theActor).waitUntilEnabled().click();
+            buttonRapidSaleProduct.resolveFor(theActor).waitUntilEnabled().click();
             //
             waitWithSleep(1);
             Target productNameElement=Target.the(
@@ -77,16 +102,6 @@ public class SelectSeveralProductsRandomlyTask implements Task {
                     );
             String nameOfProduct=productNameElement.resolveFor(theActor).getText();
             products.get(i).setNameOfProduct(nameOfProduct);
-            //
-            Target productPriceElement=Target.the(
-                    "the element with price of product").located(By.cssSelector("div[class*='quickPurchaseModalContainermodal'] span[class*='x-currencyContainer']")
-            );
-            String strPriceOfProduct=productPriceElement.resolveAllFor(theActor)
-                    .get(productPriceElement.resolveAllFor(theActor).size()-1).getText();
-            double priceOfProduct=Double.parseDouble(
-                    strPriceOfProduct.replace("$ ","").replace(".","")
-            );
-            products.get(i).setPrice(priceOfProduct);
             //
             Target summaryButton=Target.the("button to add to shopping cart").located(
                     By.cssSelector("div[class*='productSummaryBuyButtonProductDetail'] button")
@@ -103,6 +118,8 @@ public class SelectSeveralProductsRandomlyTask implements Task {
             linkToContinueBuying.resolveFor(theActor).waitUntilEnabled().click();
             waitWithSleep(2);
         }
+        BrowseTheWeb.as(theActor).evaluateJavascript(
+                String.format("window.scrollTo(%d, %d)",60,400));
         waitWithSleep(2);
 
     }
