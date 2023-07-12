@@ -1,6 +1,8 @@
 package co.com.certification.automation.webHooks;
 
+import co.com.certification.automation.tasks.OpenMainPageTask;
 import co.com.certification.automation.util.resources.LoginManager;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
@@ -35,7 +37,15 @@ public class WebCommonSteps {
     public void setTheStage() {
         OnStage.setTheStage(new OnlineCast());
         actor=Actor.named(ACTOR_NAME).whoCan(BrowseTheWeb.with(driver));
+        actor.wasAbleTo(
+                OpenMainPageTask.openPageExito()
+        );
         driver.manage().window().maximize();
+    }
+
+    @After
+    public void closeTestCase(){
+        driver.close();
     }
 
 

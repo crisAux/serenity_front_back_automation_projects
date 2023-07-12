@@ -16,22 +16,17 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 public class ArriveToCabeceraSectionTask implements Task {
-    private ExitoMainPage exitoMainPage;
+
 
     @Override
     @Step("Ingresar a la seccion de cabeceras de cama disponibles")
     public <T extends Actor> void performAs(T theActor) {
         theActor.attemptsTo(
-                Open.browserOn(exitoMainPage),
-                Click.on(ExitoMainPage.BUTTON_MENU_EXITO)
-        );
-        theActor.should(
-                GivenWhenThen.seeThat(WebElementQuestion.the(ExitoMainPage.BUTTON_DORMITORIO), isVisible())
-                .orComplainWith(LandingPageExitoError.class,
-                        LandingPageExitoError.MAIN_MENU_NOT_LOADED)
-        );
-        theActor.attemptsTo((
-                HoverOverTarget.over(ExitoMainPage.BUTTON_DORMITORIO)),
+                Click.on(ExitoMainPage.BUTTON_MENU_EXITO),
+                Wait.until(
+                        WebElementQuestion.the(ExitoMainPage.BUTTON_DORMITORIO) , WebElementStateMatchers.isEnabled()
+                ).forNoMoreThan(30).seconds(),
+                HoverOverTarget.over(ExitoMainPage.BUTTON_DORMITORIO),
                 Click.on(ExitoMainPage.BUTTON_CABECERAS),
                 Click.on(ExitoMainPage.BUTTON_CLOSE_MENU),
                 Wait.until(

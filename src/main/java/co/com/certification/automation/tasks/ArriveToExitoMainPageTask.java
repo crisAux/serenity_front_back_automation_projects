@@ -21,9 +21,7 @@ public class ArriveToExitoMainPageTask implements Task {
   @Override
   @Step("Ingresar a la pagina principal de exito.com")
     public <T extends Actor> void performAs(T theActor) {
-
         theActor.attemptsTo(
-                Open.browserOn(exitoMainPage),
                 Wait.until(
                         WebElementQuestion.the(ExitoMainPage.FORM_LOGIN_BUTTON) , WebElementStateMatchers.isEnabled()
                 ).forNoMoreThan(30).seconds()
