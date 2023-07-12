@@ -21,6 +21,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 
+
 import java.time.Duration;
 import java.time.temporal.TemporalUnit;
 import java.util.*;
@@ -30,7 +31,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 
 public class SelectSeveralProductsRandomlyTask implements Task {
 
-    private List<Product> products;
+    private static List<Product> products;
     public SelectSeveralProductsRandomlyTask() {
         generateProductsListRandom();
     }
@@ -40,7 +41,7 @@ public class SelectSeveralProductsRandomlyTask implements Task {
         Set<Integer> generatePositions = new HashSet<>();
         Random random = new Random();
         while (products.size() < 5) {
-            int position = random.nextInt(20) + 1;
+            int position = random.nextInt(12) + 1;
             if (!(generatePositions.contains(position))) {
                 generatePositions.add(position);
                 int amount = random.nextInt(10) + 1;
@@ -67,14 +68,29 @@ public class SelectSeveralProductsRandomlyTask implements Task {
             BrowseTheWeb.as(theActor).evaluateJavascript(
                     String.format("window.scrollTo(%d, %d)",coordinates.x,positionY)
             );
-
             waitWithSleep(2);
             elementProduct.resolveFor(theActor).waitUntilEnabled().click();
+            //
+            waitWithSleep(1);
+            Target productNameElement=Target.the(
+                    "the element with name of product").located(By.cssSelector("div[class*='quickPurchaseModalContainermodal']  span[class*='vtex-store-components-3-x-productBrand']")
+                    );
+            String nameOfProduct=productNameElement.resolveFor(theActor).getText();
+            products.get(i).setNameOfProduct(nameOfProduct);
+            //
+            Target productPriceElement=Target.the(
+                    "the element with price of product").located(By.cssSelector("div[class*='quickPurchaseModalContainermodal'] span[class*='x-currencyContainer']")
+            );
+            String strPriceOfProduct=productPriceElement.resolveAllFor(theActor)
+                    .get(productPriceElement.resolveAllFor(theActor).size()-1).getText();
+            double priceOfProduct=Double.parseDouble(
+                    strPriceOfProduct.replace("$ ","").replace(".","")
+            );
+            products.get(i).setPrice(priceOfProduct);
             //
             Target summaryButton=Target.the("button to add to shopping cart").located(
                     By.cssSelector("div[class*='productSummaryBuyButtonProductDetail'] button")
             );
-            waitWithSleep(1);
             summaryButton.resolveFor(theActor).waitUntilEnabled().click();
             waitWithSleep(1);
             for (int j=0;j<currentProduct.getAmount()-1;j++){
@@ -85,9 +101,9 @@ public class SelectSeveralProductsRandomlyTask implements Task {
             waitWithSleep(1);
             Target linkToContinueBuying=Target.the("link to continue buying").located(By.cssSelector("p[class='exito-vtex-components-4-x-continue']"));
             linkToContinueBuying.resolveFor(theActor).waitUntilEnabled().click();
-            waitWithSleep(1);
-
+            waitWithSleep(2);
         }
+        waitWithSleep(2);
 
     }
 
@@ -101,5 +117,9 @@ public class SelectSeveralProductsRandomlyTask implements Task {
 
     public static SelectSeveralProductsRandomlyTask selectSeveralProductsRandomlyTask(){
         return instrumented(SelectSeveralProductsRandomlyTask.class);
+    }
+
+    public static List<Product> getAllProductsInShoppingCart(){
+        return products;
     }
 }

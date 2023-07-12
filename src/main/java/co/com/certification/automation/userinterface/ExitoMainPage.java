@@ -18,4 +18,7 @@ public class ExitoMainPage extends PageObject {
             .located(By.cssSelector("a[id*='nivel3-Cabeceros']"));
     public static final Target BUTTON_CLOSE_MENU = Target.the("button for close the menu")
             .located(By.cssSelector("div[class='exito-category-menu-3-x-iconClose'] > button"));
+
+    public static final Target LINK_SHOPPING_CART= Target.the("link to all products in shopping cart")
+            .located(By.cssSelector("a[class='exito-header-3-x-minicartLink']"));
 }

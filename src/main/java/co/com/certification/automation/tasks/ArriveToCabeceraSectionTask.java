@@ -1,8 +1,7 @@
 package co.com.certification.automation.tasks;
 
-import co.com.certification.automation.exceptions.LandingPageExitoError;
-import co.com.certification.automation.userinterface.CabecerasPage;
-import co.com.certification.automation.userinterface.ExitoMainPage;
+import co.com.certification.automation.exceptions.*;
+import co.com.certification.automation.userinterface.*;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.Task;

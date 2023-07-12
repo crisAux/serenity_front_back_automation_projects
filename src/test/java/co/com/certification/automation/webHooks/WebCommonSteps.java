@@ -1,5 +1,6 @@
 package co.com.certification.automation.webHooks;
 
+import co.com.certification.automation.util.resources.LoginManager;
 import io.cucumber.java.Before;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
@@ -19,6 +20,9 @@ public class WebCommonSteps {
 
     private static final String ACTOR_NAME = "Cesar";
 
+    private static final LoginManager LOGIN_CREDENTIALS=LoginManager.getInstance();
+    public static final String EXITO_USER = LOGIN_CREDENTIALS.getUsername();
+    public static final String EXITO_PASSWORD = LOGIN_CREDENTIALS.getPassword();
 
 
     /**
