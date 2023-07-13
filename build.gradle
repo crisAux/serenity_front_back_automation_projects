@@ -27,7 +27,7 @@ sonar {
         property "sonar.host", "https://sonarcloud.io"
     }
 }
-group 'co.com.yourcompany.certification'
+group 'serenity_front_back_automation_projects'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
@@ -55,6 +55,7 @@ dependencies {
 
     testImplementation "org.slf4j:slf4j-simple:$rootProject.ext.slf4jVersion"
 }
+project.tasks["sonar"].dependsOn "classes"
 
 tasks.withType(Test){
     systemProperties = System.properties as Map<String, ?>
