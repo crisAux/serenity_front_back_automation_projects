@@ -126,7 +126,7 @@ public class SelectSeveralProductsRandomlyTask implements Task {
 
     private static void waitWithSleep(int timeInSeconds) {
         try {
-            Thread.sleep(Duration.ofSeconds(timeInSeconds));
+            Thread.sleep(1000*timeInSeconds);
         } catch (InterruptedException e) {
 
         }

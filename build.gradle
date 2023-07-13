@@ -34,6 +34,13 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'net.serenity-bdd.aggregator'
 
+
+compileOptions {
+    sourceCompatibility JavaVersion.VERSION_16
+    targetCompatibility JavaVersion.VERSION_16
+}
+
+
 repositories {
     mavenCentral()
     mavenLocal()
