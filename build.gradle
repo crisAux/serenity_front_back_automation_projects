@@ -15,8 +15,18 @@ buildscript {
     dependencies {
         classpath("net.serenity-bdd:serenity-gradle-plugin:$rootProject.ext.serenityGradlePluginVersion")
     }
-}
 
+}
+plugins {
+    id "org.sonarqube" version "4.2.1.3168"
+}
+sonar {
+    properties {
+        property "sonar.projectKey", "christiandavidalvarez_serenity_front_back_automation_projects"
+        property "sonar.organization", "christiandavidalvarez"
+        property "sonar.host", "https://sonarcloud.io"
+    }
+}
 group 'co.com.yourcompany.certification'
 version '1.0-SNAPSHOT'
 
@@ -30,6 +40,8 @@ repositories {
     mavenCentral()
     mavenLocal()
 }
+
+
 
 dependencies {
     testImplementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
