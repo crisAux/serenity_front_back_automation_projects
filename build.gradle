@@ -55,7 +55,7 @@ dependencies {
 
     testImplementation "org.slf4j:slf4j-simple:$rootProject.ext.slf4jVersion"
 }
-project.tasks["sonar"].dependsOn "classes"
+
 
 tasks.withType(Test){
     systemProperties = System.properties as Map<String, ?>
