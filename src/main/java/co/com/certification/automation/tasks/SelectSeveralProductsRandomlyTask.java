@@ -3,6 +3,7 @@ package co.com.certification.automation.tasks;
 import co.com.certification.automation.model.Product;
 import co.com.certification.automation.userinterface.CabecerasPage;
 import io.cucumber.datatable.internal.difflib.Chunk;
+import lombok.SneakyThrows;
 import net.serenitybdd.core.pages.ClickStrategy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
@@ -124,13 +125,11 @@ public class SelectSeveralProductsRandomlyTask implements Task {
 
     }
 
+    @SneakyThrows
     private static void waitWithSleep(long timeInSeconds) {
-        try {
+     
             Thread.sleep(1000*timeInSeconds);
-        } catch (InterruptedException e) {
-            System.err.println(e.getMessage());
-
-        }
+     
     }
 
     public static SelectSeveralProductsRandomlyTask selectSeveralProductsRandomlyTask(){
