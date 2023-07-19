@@ -127,9 +127,9 @@ public class SelectSeveralProductsRandomlyTask implements Task {
 
     @SneakyThrows
     private static void waitWithSleep(long timeInSeconds) {
-     
+
             Thread.sleep(1000*timeInSeconds);
-     
+
     }
 
     public static SelectSeveralProductsRandomlyTask selectSeveralProductsRandomlyTask(){
